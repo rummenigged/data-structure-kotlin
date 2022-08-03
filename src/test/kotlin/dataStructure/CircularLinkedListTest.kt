@@ -36,7 +36,7 @@ internal class CircularLinkedListTest {
         val firstExpectedValue = 2
 
 
-        assertEquals(firstExpectedValue, circularLinkedList.insertAfter(firstNode, firstExpectedValue).data)
+        assertEquals(firstExpectedValue, circularLinkedList.insertAfter(firstNode, firstExpectedValue)?.data)
 
         assertEquals(firstExpectedValue, circularLinkedList.get(headPosition + 1)?.data)
 
