@@ -98,11 +98,46 @@ internal class DoublyCircularLinkedListTest {
     }
 
     @Test
+    fun `assert insertAfter success`() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+        val firstExpectedValue = 1
+        val head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+        val secondExpectedValue = 2
+        val secondNode = doublyCircularLinkedList.insertAfter(head, secondExpectedValue)
+        assertEquals(secondExpectedValue, secondNode?.data)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.prev?.data)
+
+        val thirdExpectedValue = 3
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.insertAfter(secondNode, thirdExpectedValue)?.data)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.prev?.data)
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.prev?.data)
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+    }
+
+    @Test
     fun get() {
     }
 
     @Test
-    fun insertAfter() {
+    fun testGet() {
     }
 
     @Test
@@ -119,9 +154,5 @@ internal class DoublyCircularLinkedListTest {
 
     @Test
     fun removeByKeyRecursively() {
-    }
-
-    @Test
-    fun testGet() {
     }
 }
