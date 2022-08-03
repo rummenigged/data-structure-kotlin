@@ -50,12 +50,14 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
         }
 
     override fun insertAfter(prevNode: DoublyLinkedNode?, data: T): DoublyLinkedNode? =
-        DoublyLinkedNode(data).apply {
-            next = prevNode?.next
-            prev = prevNode
+        prevNode?.let { prev ->
+            DoublyLinkedNode(data).apply {
+                next = prev.next
+                this.prev = prev
 
-            prevNode?.next?.prev = this
-            prevNode?.next = this
+                prev.next?.prev = this
+                prev.next = this
+            }
         }
 
     override fun removeAfter(prevNode: DoublyLinkedNode?): DoublyLinkedNode? {
