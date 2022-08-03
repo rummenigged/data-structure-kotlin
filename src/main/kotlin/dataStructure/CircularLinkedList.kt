@@ -1,5 +1,4 @@
 package dataStructure
-
 class CircularLinkedList<T: Comparable<T>>: SinglyLinkedList<T>() {
 
     override fun push(data: T): SinglyLinkedNode =
@@ -22,13 +21,15 @@ class CircularLinkedList<T: Comparable<T>>: SinglyLinkedList<T>() {
             }
         }
 
-    override fun insertAfter(prevNode: SinglyLinkedNode?, data: T): SinglyLinkedNode =
-        SinglyLinkedNode(data).apply{
-            next = prevNode?.next
-            prevNode?.next = this
+    override fun insertAfter(prevNode: SinglyLinkedNode?, data: T): SinglyLinkedNode? =
+        prevNode?.let { prev ->
+            SinglyLinkedNode(data).apply{
+                next = prev.next
+                prev.next = this
 
-            if (prevNode?.next == head){
-                head = this
+                if (prev.next == head){
+                    head = this
+                }
             }
         }
 
@@ -262,3 +263,4 @@ class CircularLinkedList<T: Comparable<T>>: SinglyLinkedList<T>() {
         }
     }
 }
+
