@@ -84,8 +84,37 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
         }
 
     override fun removeAfter(position: Int): DoublyLinkedNode? {
-        TODO("Not yet implemented")
+        var prev = head
+        for (i in 0 until position){
+            if (prev?.next != head){
+               prev = prev?.next
+            }else{
+                return null
+            }
+        }
+
+        return when {
+            head?.next == head -> {
+                head?.also {
+                    head = null
+                }
+            }
+            prev?.next == head -> {
+                head?.apply {
+                    next?.prev = prev
+                    prev?.next = next
+                    head = next
+                }
+            }
+            else -> {
+                prev?.next?.apply {
+                    this.prev?.next = next
+                    this.next?.prev = prev
+                }
+            }
+        }
     }
+
 
     override fun removeLast(): DoublyLinkedNode? =
         when{
