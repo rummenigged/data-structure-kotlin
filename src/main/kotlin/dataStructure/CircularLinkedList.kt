@@ -250,7 +250,7 @@ class CircularLinkedList<T: Comparable<T>>: SinglyLinkedList<T>() {
     override fun toString(): String {
         return when {
             head == null -> "Empty List"
-            head?.next == null -> "${head?.data} -> "
+            head?.next == head -> "${head?.data} -> "
             else -> {
                 var result = "${head?.data} -> "
                 var node = head?.next
