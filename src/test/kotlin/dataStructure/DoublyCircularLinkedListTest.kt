@@ -136,49 +136,6 @@ internal class DoublyCircularLinkedListTest {
     }
 
     @Test
-    fun `assert get success`() {
-        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
-
-        val firstExpectedValue = 1
-        val head = doublyCircularLinkedList.push(firstExpectedValue)
-//      list = 1 ->
-
-        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.data)
-
-        val secondExpectedValue = 2
-        doublyCircularLinkedList.append(secondExpectedValue)
-//      list = 1 -> 2 ->
-
-        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.data)
-
-        val thirdExpectedValue = 3
-        doublyCircularLinkedList.append(thirdExpectedValue)
-//      list = 1 -> 2 -> 3 ->
-
-        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.data)
-    }
-
-    @Test
-    fun `assert get by position success`() {
-        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
-
-        val firstExpectedValue = 1
-        val head = doublyCircularLinkedList.push(firstExpectedValue)
-//      list = 1 ->
-
-        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition)?.data)
-
-        val secondExpectedValue = 2
-        doublyCircularLinkedList.append(secondExpectedValue)
-//      list = 1 -> 2 ->
-
-        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(headPosition + 1)?.data)
-
-        val thirdExpectedValue = 3
-        doublyCircularLinkedList.append(thirdExpectedValue)
-    }
-
-    @Test
     fun `assert removeLast success`(){
         val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
 
@@ -437,5 +394,118 @@ internal class DoublyCircularLinkedListTest {
         assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, forthExpectedValue)?.next?.data)
 
         assertEquals(forthExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+    }
+
+    @Test
+    fun `assert getLast success`() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        var head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.getLast(head)?.data)
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        val secondNode = doublyCircularLinkedList.getLast(head)
+        assertEquals(secondExpectedValue, secondNode?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.next?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.prev?.data)
+//      list = 1 ->
+
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+        val thirdNode = doublyCircularLinkedList.get(head, thirdExpectedValue)
+
+        assertEquals(thirdExpectedValue, thirdNode?.data)
+
+        assertEquals(firstExpectedValue, thirdNode?.next?.data)
+
+        assertEquals(secondExpectedValue, thirdNode?.prev?.data)
+    }
+
+    @Test
+    fun `assert get by position success`() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        val head = doublyCircularLinkedList.get(headPosition)
+        assertEquals(firstExpectedValue, head?.data)
+
+        assertEquals(firstExpectedValue, head?.next?.data)
+
+        assertEquals(firstExpectedValue, head?.prev?.data)
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        val secondNode = doublyCircularLinkedList.get(headPosition + 1)
+
+        assertEquals(secondExpectedValue, secondNode?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.next?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.prev?.data)
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(thirdExpectedValue)
+
+        val thirdNode = doublyCircularLinkedList.get(headPosition + 2)
+
+        assertEquals(thirdExpectedValue, thirdNode?.data)
+
+        assertEquals(firstExpectedValue, thirdNode?.next?.data)
+
+        assertEquals(secondExpectedValue, thirdNode?.prev?.data)
+    }
+
+    @Test
+    fun `assert get success`() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+        val firstNode = doublyCircularLinkedList.get(head, firstExpectedValue)
+        assertEquals(firstExpectedValue, firstNode?.data)
+
+        assertEquals(firstExpectedValue, firstNode?.next?.data)
+
+        assertEquals(firstExpectedValue, firstNode?.prev?.data)
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        val secondNode = doublyCircularLinkedList.get(head, secondExpectedValue)
+
+        assertEquals(secondExpectedValue, secondNode?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.next?.data)
+
+        assertEquals(firstExpectedValue, secondNode?.prev?.data)
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        val thirdNode = doublyCircularLinkedList.get(head, thirdExpectedValue)
+
+        assertEquals(thirdExpectedValue, thirdNode?.data)
+
+        assertEquals(firstExpectedValue, thirdNode?.next?.data)
+
+        assertEquals(secondExpectedValue, thirdNode?.prev?.data)
     }
 }
