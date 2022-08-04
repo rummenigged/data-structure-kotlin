@@ -272,8 +272,59 @@ internal class DoublyCircularLinkedListTest {
     }
 
     @Test
-    fun removeAfter() {
+    fun `assert removeAfter success`() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
 
+        assertEquals(null, doublyCircularLinkedList.removeHead())
+
+        val firstExpectedValue = 1
+        var head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.removeAfter(head)?.data)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition)?.prev?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.removeAfter(head)?.data)
+//      list = null
+
+        assertEquals(null, doublyCircularLinkedList.removeAfter(head)?.data)
+
+        val thirdExpectedValue = 3
+        head = doublyCircularLinkedList.push(firstExpectedValue)
+        val secondNode = doublyCircularLinkedList.append(secondExpectedValue)
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.removeAfter(secondNode)?.data)
+//      list = 1 -> 2 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition + 1)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition + 1)?.prev?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(headPosition)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(headPosition)?.prev?.data)
+
+        val forthExpectedValue = 4
+        val thirdNode = doublyCircularLinkedList.append(thirdExpectedValue)
+        doublyCircularLinkedList.append(forthExpectedValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(forthExpectedValue, doublyCircularLinkedList.removeAfter(thirdNode)?.data)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.next?.data)
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
     }
 
     @Test
