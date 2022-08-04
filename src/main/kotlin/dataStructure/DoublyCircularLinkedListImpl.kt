@@ -68,13 +68,36 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
         TODO("Not yet implemented")
     }
 
-    override fun removeLast(): DoublyLinkedNode? {
-        TODO("Not yet implemented")
-    }
+    override fun removeLast(): DoublyLinkedNode? =
+        when{
+            isEmpty() -> null
+            head?.next == head -> head.also {
+                head = null
+            }
+            else -> getLast(head)?.also {
+                head?.prev = it.prev
+                it.prev?.next = head
+            }
+        }
 
-    override fun removeHead(): DoublyLinkedNode? {
-        TODO("Not yet implemented")
-    }
+    override fun removeHead(): DoublyLinkedNode? =
+        when {
+            isEmpty() -> null
+            head?.next == head -> head.also {
+                head = null
+            }
+            else -> head?.also {
+                if (it.next?.next == head){
+                    head = it.next
+                    head?.next = head
+                    head?.prev = head
+
+                }else{
+                    it.next?.prev = it.prev
+                    it.prev?.next = it.next
+                }
+            }
+        }
 
     override fun removeByKey(node: DoublyLinkedNode?, key: T): DoublyLinkedNode? {
         TODO("Not yet implemented")
@@ -100,4 +123,20 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
             }
             current
         }
+
+    override fun toString(): String{
+        return when {
+            head == null -> "Empty List"
+            head?.next == head -> return "${head?.data} ->"
+            else -> {
+                var node = head?.next
+                var result = "${head?.data} -> "
+                while (node != head){
+                    result += "${node?.data} ${if (node?.next != null) "-> " else ""}"
+                    node = node?.next
+                }
+                return result
+            }
+        }
+    }
 }
