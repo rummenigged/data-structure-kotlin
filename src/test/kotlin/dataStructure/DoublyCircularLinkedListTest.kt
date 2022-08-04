@@ -381,5 +381,61 @@ internal class DoublyCircularLinkedListTest {
 
     @Test
     fun removeByKey() {
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        var head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.removeByKey(head, firstExpectedValue)?.data)
+//      list = null
+
+        assertEquals(null, doublyCircularLinkedList.removeByKey(head, firstExpectedValue))
+
+        val secondExpectedValue = 2
+        head = doublyCircularLinkedList.push(firstExpectedValue)
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.removeByKey(head, secondExpectedValue)?.data)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(headPosition)?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(secondExpectedValue)
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.removeByKey(head, thirdExpectedValue)?.data)
+//      list = 1 -> 2 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.prev?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+        val forthExpectedValue = 4
+        doublyCircularLinkedList.append(thirdExpectedValue)
+        doublyCircularLinkedList.append(forthExpectedValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.removeByKey(head, secondExpectedValue)?.data)
+//      list = 1 -> 3 -> 4 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.prev?.data)
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, forthExpectedValue)?.next?.data)
+
+        assertEquals(forthExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
     }
 }
