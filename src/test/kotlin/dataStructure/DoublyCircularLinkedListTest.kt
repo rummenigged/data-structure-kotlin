@@ -153,8 +153,9 @@ internal class DoublyCircularLinkedListTest {
 
         val thirdExpectedValue = 3
         doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
 
-//        assertEquals(null, doublyCircularLinkedList.get(head, 4))
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.get(head, thirdExpectedValue)?.data)
     }
 
     @Test
@@ -178,7 +179,101 @@ internal class DoublyCircularLinkedListTest {
     }
 
     @Test
+    fun `assert removeLast success`(){
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        assertEquals(null, doublyCircularLinkedList.removeLast())
+
+        val firstExpectedValue = 1
+        doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.removeLast()?.data)
+
+        assertEquals(null, doublyCircularLinkedList.removeLast())
+
+        val secondExpectedValue = 2
+        val head = doublyCircularLinkedList.push(firstExpectedValue)
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.removeLast()?.data)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(secondExpectedValue)
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.removeLast()?.data)
+
+//      list = 1 -> 2 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.prev?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+    }
+
+    @Test
+    fun `assert removeHead success`(){
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        assertEquals(null, doublyCircularLinkedList.removeHead())
+
+        val firstExpectedValue = 1
+        doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.removeHead()?.data)
+//      list = null
+
+        assertEquals(null, doublyCircularLinkedList.removeHead())
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.push(secondExpectedValue)
+        val head = doublyCircularLinkedList.append(firstExpectedValue)
+//      list = 2 -> 1 ->
+
+        println(doublyCircularLinkedList.toString())
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.removeHead()?.data)
+//      list = 1 ->
+
+        println(doublyCircularLinkedList.toString())
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.push(thirdExpectedValue)
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 3 -> 1 -> 2 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.removeHead()?.data)
+//      list = 1 -> 2 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.next?.data)
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.get(head, secondExpectedValue)?.prev?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.next?.data)
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.get(head, firstExpectedValue)?.prev?.data)
+    }
+
+    @Test
     fun removeAfter() {
+
     }
 
     @Test
