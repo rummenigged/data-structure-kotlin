@@ -41,14 +41,6 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
             }
         }
 
-    override fun get(node: DoublyLinkedNode?, key: T): DoublyLinkedNode? =
-        when{
-            isEmpty() -> null
-            node == null -> null
-            node.data == key -> node
-            else -> get(node.next, key)
-        }
-
     override fun insertAfter(prevNode: DoublyLinkedNode?, data: T): DoublyLinkedNode? =
         prevNode?.let { prev ->
             DoublyLinkedNode(data).apply {
@@ -57,6 +49,37 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
 
                 prev.next?.prev = this
                 prev.next = this
+            }
+        }
+
+    override fun removeLast(): DoublyLinkedNode? =
+        when{
+            isEmpty() -> null
+            head?.next == head -> head.also {
+                head = null
+            }
+            else -> getLast(head)?.also {
+                head?.prev = it.prev
+                it.prev?.next = head
+            }
+        }
+
+    override fun removeHead(): DoublyLinkedNode? =
+        when {
+            isEmpty() -> null
+            head?.next == head -> head.also {
+                head = null
+            }
+            else -> head?.also {
+                if (it.next?.next == head){
+                    head = it.next
+                    head?.next = head
+                    head?.prev = head
+
+                }else{
+                    it.next?.prev = it.prev
+                    it.prev?.next = it.next
+                }
             }
         }
 
@@ -115,38 +138,6 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
         }
     }
 
-
-    override fun removeLast(): DoublyLinkedNode? =
-        when{
-            isEmpty() -> null
-            head?.next == head -> head.also {
-                head = null
-            }
-            else -> getLast(head)?.also {
-                head?.prev = it.prev
-                it.prev?.next = head
-            }
-        }
-
-    override fun removeHead(): DoublyLinkedNode? =
-        when {
-            isEmpty() -> null
-            head?.next == head -> head.also {
-                head = null
-            }
-            else -> head?.also {
-                if (it.next?.next == head){
-                    head = it.next
-                    head?.next = head
-                    head?.prev = head
-
-                }else{
-                    it.next?.prev = it.prev
-                    it.prev?.next = it.next
-                }
-            }
-        }
-
     override fun removeByKey(node: DoublyLinkedNode?, key: T): DoublyLinkedNode? =
         when{
             isEmpty() -> null
@@ -194,6 +185,14 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
                 }
             }
             current
+        }
+
+    override fun get(node: DoublyLinkedNode?, key: T): DoublyLinkedNode? =
+        when{
+            isEmpty() -> null
+            node == null -> null
+            node.data == key -> node
+            else -> get(node.next, key)
         }
 
     override fun toString(): String{
