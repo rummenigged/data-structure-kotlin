@@ -35,5 +35,9 @@ abstract class LinkedList<T: Comparable<T>, N: LinkedList<T, N>.Node<N>> {
 
     abstract fun getLast(node: N?): N?
 
+    abstract fun length(node: N? = head): Int
+
+    abstract fun lengthTailRec(node: N? = head, count: Int = 1): Int
+
     protected fun isEmpty(): Boolean = head == null
 }

@@ -157,4 +157,13 @@ open class SinglyLinkedListImpl<T: Comparable<T>>: SinglyLinkedList<T>() {
             }
             current
         }
+
+    override fun length(node: SinglyLinkedNode?): Int =
+        if (node == null) 0
+        else 1 + length(node.next)
+
+    override fun lengthTailRec(node: SinglyLinkedNode?, count: Int): Int =
+        if (node == null) count
+        else lengthTailRec(node.next, count + 1)
+
 }

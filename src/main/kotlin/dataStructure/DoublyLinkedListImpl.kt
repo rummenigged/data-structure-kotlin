@@ -165,4 +165,12 @@ class DoublyLinkedListImpl<T: Comparable<T>>: DoublyLinkedList<T>() {
             node.next == null -> node
             else -> getLast(node.next)
         }
+
+    override fun length(node: DoublyLinkedNode?): Int =
+        if (node == null) 0
+        else 1 + length(node.next)
+
+    override fun lengthTailRec(node: DoublyLinkedNode?, count: Int): Int =
+        if (node == null) count
+        else lengthTailRec(node.next, count + 1)
 }

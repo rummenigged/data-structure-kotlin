@@ -210,4 +210,20 @@ class DoublyCircularLinkedListImpl<T : Comparable<T>>: DoublyLinkedList<T>() {
             }
         }
     }
+
+    override fun length(node: DoublyLinkedNode?): Int =
+        when{
+            node == null -> 0
+            node.next == head -> 1
+            else -> 1 + length(node.next)
+        }
+
+    override fun lengthTailRec(node: DoublyLinkedNode?, count: Int): Int =
+        when{
+            node == null -> 0
+
+            node.next == head -> count
+
+            else -> lengthTailRec(node.next, count + 1)
+        }
 }

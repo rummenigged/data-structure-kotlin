@@ -262,5 +262,19 @@ class CircularLinkedList<T: Comparable<T>>: SinglyLinkedList<T>() {
             }
         }
     }
+
+    override fun length(node: SinglyLinkedNode?): Int =
+        when{
+            node == null -> 0
+            node.next == head -> 1
+            else -> 1 + length(node.next)
+        }
+
+    override fun lengthTailRec(node: SinglyLinkedNode?, count: Int): Int =
+        when{
+            node == null -> 0
+            node.next == head -> count
+            else -> lengthTailRec(node.next, count + 1)
+        }
 }
 
