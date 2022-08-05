@@ -537,4 +537,41 @@ internal class DoublyLinkedListImplTest {
 
         assertEquals(thirdExpectedValue, doublyLinkedList.lengthTailRec())
     }
+
+    @Test
+    fun `assert middle success`(){
+        val doublyLinkedList = DoublyLinkedListImpl<Int>()
+
+        assertEquals(null, doublyLinkedList.middle()?.data)
+
+        val firstExpectedValue = 1
+        doublyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyLinkedList.middle()?.data)
+
+        val secondExpectedValue = 2
+        doublyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyLinkedList.middle()?.data)
+
+        val thirdValue = 3
+        doublyLinkedList.append(thirdValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(secondExpectedValue, doublyLinkedList.middle()?.data)
+
+        val forthValue = 4
+        doublyLinkedList.append(forthValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(thirdValue, doublyLinkedList.middle()?.data)
+
+        val fifthValue = 5
+        doublyLinkedList.append(fifthValue)
+//      list = 1 -> 2 -> 3 -> 4 -> 5 ->
+
+        assertEquals(thirdValue, doublyLinkedList.middle()?.data)
+    }
 }

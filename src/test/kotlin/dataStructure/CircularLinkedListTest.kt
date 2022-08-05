@@ -458,7 +458,7 @@ internal class CircularLinkedListTest {
         assertEquals(null, circularLinkedList.get(5)?.data)
     }
 
-    @org.junit.Test
+    @Test
     fun `assert length success`(){
         val circularLinkedList = CircularLinkedList<Int>()
 
@@ -481,7 +481,7 @@ internal class CircularLinkedListTest {
         assertEquals(thirdExpectedValue, circularLinkedList.length(head))
     }
 
-    @org.junit.Test
+    @Test
     fun `assert lengthTailRec success`(){
         val circularLinkedList = CircularLinkedList<Int>()
 
@@ -502,5 +502,42 @@ internal class CircularLinkedListTest {
 //      list = 1 -> 2 -> 3 ->
 
         assertEquals(thirdExpectedValue, circularLinkedList.lengthTailRec())
+    }
+
+    @Test
+    fun `assert middle success`(){
+        val circularLinkedList = CircularLinkedList<Int>()
+
+        assertEquals(null, circularLinkedList.middle()?.data)
+
+        val firstExpectedValue = 1
+        circularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, circularLinkedList.middle()?.data)
+
+        val secondExpectedValue = 2
+        circularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, circularLinkedList.middle()?.data)
+
+        val thirdValue = 3
+        circularLinkedList.append(thirdValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(secondExpectedValue, circularLinkedList.middle()?.data)
+
+        val forthValue = 4
+        circularLinkedList.append(forthValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(thirdValue, circularLinkedList.middle()?.data)
+
+        val fifthValue = 5
+        circularLinkedList.append(fifthValue)
+//      list = 1 -> 2 -> 3 -> 4 -> 5 ->
+
+        assertEquals(thirdValue, circularLinkedList.middle()?.data)
     }
 }

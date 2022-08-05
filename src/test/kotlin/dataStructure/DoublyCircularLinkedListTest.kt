@@ -554,4 +554,41 @@ internal class DoublyCircularLinkedListTest {
 
         assertEquals(thirdExpectedValue, doublyCircularLinkedList.lengthTailRec())
     }
+
+    @Test
+    fun `assert middle success`(){
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        assertEquals(null, doublyCircularLinkedList.middle()?.data)
+
+        val firstExpectedValue = 1
+        doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.middle()?.data)
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.middle()?.data)
+
+        val thirdValue = 3
+        doublyCircularLinkedList.append(thirdValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.middle()?.data)
+
+        val forthValue = 4
+        doublyCircularLinkedList.append(forthValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(thirdValue, doublyCircularLinkedList.middle()?.data)
+
+        val fifthValue = 5
+        doublyCircularLinkedList.append(fifthValue)
+//      list = 1 -> 2 -> 3 -> 4 -> 5 ->
+
+        assertEquals(thirdValue, doublyCircularLinkedList.middle()?.data)
+    }
 }

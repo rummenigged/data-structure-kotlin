@@ -442,4 +442,41 @@ internal class SinglyLinkedListTest {
 
         assertEquals(thirdExpectedValue, singlyLinkedList.lengthTailRec())
     }
+
+    @Test
+    fun `assert middle success`(){
+        val singlyLinkedList = SinglyLinkedListImpl<Int>()
+
+        assertEquals(null, singlyLinkedList.middle()?.data)
+
+        val firstExpectedValue = 1
+        singlyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, singlyLinkedList.middle()?.data)
+
+        val secondExpectedValue = 2
+        singlyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, singlyLinkedList.middle()?.data)
+
+        val thirdValue = 3
+        singlyLinkedList.append(thirdValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(secondExpectedValue, singlyLinkedList.middle()?.data)
+
+        val forthValue = 4
+        singlyLinkedList.append(forthValue)
+//      list = 1 -> 2 -> 3 -> 4 ->
+
+        assertEquals(thirdValue, singlyLinkedList.middle()?.data)
+
+        val fifthValue = 5
+        singlyLinkedList.append(fifthValue)
+//      list = 1 -> 2 -> 3 -> 4 -> 5 ->
+
+        assertEquals(thirdValue, singlyLinkedList.middle()?.data)
+    }
 }
