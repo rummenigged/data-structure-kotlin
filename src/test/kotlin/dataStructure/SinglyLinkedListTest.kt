@@ -396,4 +396,50 @@ internal class SinglyLinkedListTest {
 
         assertEquals(null, singlyLinkedList.get(4)?.data)
     }
+
+    @Test
+    fun `assert length success`(){
+        val singlyLinkedList = SinglyLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = singlyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, singlyLinkedList.length(head))
+
+        val secondExpectedValue = 2
+        singlyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, singlyLinkedList.length(head))
+
+        val thirdExpectedValue = 3
+        singlyLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, singlyLinkedList.length(head))
+    }
+
+    @Test
+    fun `assert lengthTailRec success`(){
+        val singlyLinkedList = SinglyLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = singlyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, singlyLinkedList.lengthTailRec())
+
+        val secondExpectedValue = 2
+        singlyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, singlyLinkedList.lengthTailRec())
+
+        val thirdExpectedValue = 3
+        singlyLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, singlyLinkedList.lengthTailRec())
+    }
 }

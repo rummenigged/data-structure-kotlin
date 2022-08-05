@@ -508,4 +508,50 @@ internal class DoublyCircularLinkedListTest {
 
         assertEquals(secondExpectedValue, thirdNode?.prev?.data)
     }
+
+    @Test
+    fun `assert length success`(){
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.length(head))
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.length(head))
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.length(head))
+    }
+
+    @Test
+    fun `assert lengthTailRec success`(){
+        val doublyCircularLinkedList = DoublyCircularLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = doublyCircularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyCircularLinkedList.lengthTailRec())
+
+        val secondExpectedValue = 2
+        doublyCircularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyCircularLinkedList.lengthTailRec())
+
+        val thirdExpectedValue = 3
+        doublyCircularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyCircularLinkedList.lengthTailRec())
+    }
 }

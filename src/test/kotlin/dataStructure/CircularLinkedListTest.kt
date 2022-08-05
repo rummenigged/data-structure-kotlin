@@ -457,4 +457,50 @@ internal class CircularLinkedListTest {
 
         assertEquals(null, circularLinkedList.get(5)?.data)
     }
+
+    @org.junit.Test
+    fun `assert length success`(){
+        val circularLinkedList = CircularLinkedList<Int>()
+
+        val firstExpectedValue = 1
+        val head = circularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, circularLinkedList.length(head))
+
+        val secondExpectedValue = 2
+        circularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, circularLinkedList.length(head))
+
+        val thirdExpectedValue = 3
+        circularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, circularLinkedList.length(head))
+    }
+
+    @org.junit.Test
+    fun `assert lengthTailRec success`(){
+        val circularLinkedList = CircularLinkedList<Int>()
+
+        val firstExpectedValue = 1
+        val head = circularLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, circularLinkedList.lengthTailRec())
+
+        val secondExpectedValue = 2
+        circularLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, circularLinkedList.lengthTailRec())
+
+        val thirdExpectedValue = 3
+        circularLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, circularLinkedList.lengthTailRec())
+    }
 }

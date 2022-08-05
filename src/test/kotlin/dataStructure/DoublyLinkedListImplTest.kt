@@ -490,6 +490,51 @@ internal class DoublyLinkedListImplTest {
         assertEquals(thirdExpectedValue, doublyLinkedList.get(1)?.next?.data)
 
         assertEquals(secondExpectedValue, doublyLinkedList.get(2)?.prev?.data)
+    }
 
+    @Test
+    fun `assert length success`(){
+        val doublyLinkedList = DoublyLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = doublyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyLinkedList.length(head))
+
+        val secondExpectedValue = 2
+        doublyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyLinkedList.length(head))
+
+        val thirdExpectedValue = 3
+        doublyLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyLinkedList.length(head))
+    }
+
+    @Test
+    fun `assert lengthTailRec success`(){
+        val doublyLinkedList = DoublyLinkedListImpl<Int>()
+
+        val firstExpectedValue = 1
+        val head = doublyLinkedList.push(firstExpectedValue)
+//      list = 1 ->
+
+        assertEquals(firstExpectedValue, doublyLinkedList.lengthTailRec())
+
+        val secondExpectedValue = 2
+        doublyLinkedList.append(secondExpectedValue)
+//      list = 1 -> 2 ->
+
+        assertEquals(secondExpectedValue, doublyLinkedList.lengthTailRec())
+
+        val thirdExpectedValue = 3
+        doublyLinkedList.append(thirdExpectedValue)
+//      list = 1 -> 2 -> 3 ->
+
+        assertEquals(thirdExpectedValue, doublyLinkedList.lengthTailRec())
     }
 }
